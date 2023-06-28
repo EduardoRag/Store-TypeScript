@@ -3,6 +3,7 @@ import useGlobalContext from '../../hooks/useGlobalContext';
 import styles from './styles.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import ProductType from '../../types/ProductType';
+import notify from '../../utils/notify';
 
 const defaultForm = {
   id: 0,
@@ -40,6 +41,7 @@ function AddProduct() {
 
     setAllProducts([...localProducts]);
 
+    notify('Produto inserido com sucesso!', 'success');
     navigate('/main');
   }
 
