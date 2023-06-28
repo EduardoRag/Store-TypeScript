@@ -1,7 +1,47 @@
+import { ChangeEvent, FormEvent, useState } from 'react';
+import useGlobalContext from '../../hooks/useGlobalContext';
 import styles from './styles.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import ProductType from '../../types/ProductType';
+
+const defaultForm = {
+  id: 0,
+  name: '',
+  value: 0,
+  stock: 0,
+  description: '',
+  image: ''
+}
 
 function AddProduct() {
+  const navigate = useNavigate();
+  const { allProducts, setAllProducts } = useGlobalContext();
+  const [form, setForm] = useState<ProductType>({ ...defaultForm })
+
+  const handleChangeForm = (event: ChangeEvent<HTMLInputElement>) => {
+    if (['stock', 'value'].includes(event.target.name)) {
+      setForm({ ...form, [event.target.name]: event.target.valueAsNumber || 0 });
+      return;
+    }
+
+    setForm({ ...form, [event.target.name]: event.target.value });
+  }
+
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
+
+    const localProducts = [...allProducts];
+
+    const lastProductId = localProducts[localProducts.length - 1].id;
+
+    form.id = lastProductId + 1;
+
+    localProducts.push({ ...form });
+
+    setAllProducts([...localProducts]);
+
+    navigate('/main');
+  }
 
   return (
     <div className={styles.container}>
@@ -10,31 +50,75 @@ function AddProduct() {
       </div>
 
       <div className={styles['content-form']}>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className={styles['form-inputs']}>
+
             <div className={styles['input-label']}>
               <label htmlFor='name'>
                 Nome do produto
               </label>
-              <input type='text' id='name' />
+              <input
+                type='text'
+                id='name'
+                name='name'
+                value={form.name}
+                onChange={handleChangeForm}
+                required
+              />
             </div>
+
             <div className={styles['content-price-stock']}>
               <div className={styles['input-label']}>
-                <label htmlFor='price'>Preço</label>
-                <input type='number' placeholder='R$' id='price' />
+                <label htmlFor='value'>Preço</label>
+                <input
+                  type='number'
+                  placeholder='R$'
+                  id='value'
+                  name='value'
+                  value={form.value}
+                  onChange={handleChangeForm}
+                  required
+                  min={0}
+                />
               </div>
+
               <div className={styles['input-label']}>
                 <label htmlFor='stock'>Estoque</label>
-                <input type='number' placeholder='Un' id='stock' />
+                <input
+                  type='number'
+                  placeholder='Un'
+                  id='stock'
+                  name='stock'
+                  value={form.stock}
+                  onChange={handleChangeForm}
+                  required
+                  min={0}
+                />
               </div>
             </div>
+
             <div className={styles['input-label']}>
-              <label htmlFor='product'>Descrição do produto</label>
-              <input type='text' id='product' />
+              <label htmlFor='description'>Descrição do produto</label>
+              <input
+                type='text'
+                id='description'
+                name='description'
+                value={form.description}
+                onChange={handleChangeForm}
+                required
+              />
             </div>
+
             <div className={styles['input-label']}>
               <label htmlFor='image'>Imagem</label>
-              <input type='text' id='image' />
+              <input
+                type='text'
+                id='image'
+                name='image'
+                value={form.image}
+                onChange={handleChangeForm}
+                required
+              />
             </div>
           </div>
 
