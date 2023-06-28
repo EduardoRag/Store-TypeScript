@@ -2,15 +2,14 @@ import { Outlet } from 'react-router-dom';
 import Header from '../../components/Header';
 import styles from './styles.module.scss';
 import ConfirmModal from '../../components/ModalConfirm';
-import { useState } from 'react';
+import useGlobalContext from '../../hooks/useGlobalContext';
 
 function HeaderLayout() {
-    const [openModal, setOpenModal] = useState(false);
-
-    const handleConfirmDelete = () => {
-        setOpenModal(false);
-    }
-
+    const {
+        openModal,
+        handleConfirmModal,
+        handleCloseModal
+    } = useGlobalContext();
     return (
         <div className={styles.container}>
             <Header />
@@ -23,8 +22,8 @@ function HeaderLayout() {
 
             <ConfirmModal
                 open={openModal}
-                handleClose={() => setOpenModal(false)}
-                handleConfirm={handleConfirmDelete}
+                handleClose={handleCloseModal}
+                handleConfirm={handleConfirmModal}
             />
         </div>
     );

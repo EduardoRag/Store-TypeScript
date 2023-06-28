@@ -2,12 +2,14 @@ import ProductType from '../../types/ProductType';
 import styles from './styles.module.scss';
 import RemoveIcon from '../../assets/remove.svg';
 import { useState } from 'react';
+import useGlobalContext from '../../hooks/useGlobalContext';
 
 type Props = {
     product: ProductType
 }
 
 function ProductCard({ product }: Props) {
+    const { handleOpenModal } = useGlobalContext();
     const [showDelete, setShowDelete] = useState(false);
 
 
@@ -23,6 +25,7 @@ function ProductCard({ product }: Props) {
                     className={styles.remove}
                     src={RemoveIcon}
                     alt='Remove Icon'
+                    onClick={handleOpenModal}
                 />
             }
 
