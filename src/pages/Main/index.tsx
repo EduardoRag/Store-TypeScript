@@ -20,6 +20,7 @@ function Main() {
           Adicionar Produto
         </button>
       </div>
+
       <div className={styles['content-products']}>
         {allProducts.map((product) => (
           <ProductCard
