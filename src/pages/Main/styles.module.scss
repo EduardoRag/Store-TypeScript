@@ -25,7 +25,7 @@
 .content-products {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 24px;
 
   width: 100%;
@@ -34,5 +34,5 @@
 
   margin-top: 62px;
 
-  overflow-x: scroll;
+  overflow-x: auto;
 }

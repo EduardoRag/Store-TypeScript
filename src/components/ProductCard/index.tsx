@@ -25,7 +25,7 @@ function ProductCard({ product }: Props) {
                     className={styles.remove}
                     src={RemoveIcon}
                     alt='Remove Icon'
-                    onClick={handleOpenModal}
+                    onClick={() => handleOpenModal(product.id)}
                 />
             }
 

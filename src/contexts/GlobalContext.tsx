@@ -5,7 +5,7 @@ type GlobalContextType = {
     openModal: boolean;
     handleConfirmModal: () => void,
     handleCloseModal: () => void,
-    handleOpenModal: () => void,
+    handleOpenModal: (productId: number) => void,
     allProducts: ProductType[],
     setAllProducts: Dispatch<SetStateAction<ProductType[]>>;
 }
@@ -14,7 +14,7 @@ const GlobalContext = createContext<GlobalContextType>({
     openModal: false,
     handleConfirmModal: () => { },
     handleCloseModal: () => { },
-    handleOpenModal: () => { },
+    handleOpenModal: (productId: number) => { },
     allProducts: [],
     setAllProducts: () => { }
 });
