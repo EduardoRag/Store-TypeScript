@@ -1,8 +1,11 @@
 import { useState } from "react";
+import ProductType from "../types/ProductType";
+import products from "../data/products";
 
 
 const useGlobalContextProvider = () => {
     const [openModal, setOpenModal] = useState(false);
+    const [allProducts, setAllProducts] = useState<ProductType[]>([...products]);
 
     const handleConfirmModal = () => {
         setOpenModal(false);
@@ -20,7 +23,9 @@ const useGlobalContextProvider = () => {
         openModal,
         handleConfirmModal,
         handleCloseModal,
-        handleOpenModal
+        handleOpenModal,
+        allProducts,
+        setAllProducts
     }
 }
 

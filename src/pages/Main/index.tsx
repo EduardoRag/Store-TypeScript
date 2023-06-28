@@ -1,13 +1,11 @@
-import ProductCard from '../../components/ProductCard';
-import styles from './styles.module.scss';
-import products from '../../data/products';
-import { useState } from 'react';
-import ProductType from '../../types/ProductType';
 import { useNavigate } from 'react-router-dom';
+import ProductCard from '../../components/ProductCard';
+import useGlobalContext from '../../hooks/useGlobalContext';
+import styles from './styles.module.scss';
 
 function Main() {
+  const { allProducts } = useGlobalContext();
   const navigate = useNavigate();
-  const [allProducts, setAllProducts] = useState<ProductType[]>([...products]);
 
   return (
     <div className={styles.container}>
