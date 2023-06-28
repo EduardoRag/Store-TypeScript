@@ -1,6 +1,7 @@
 @import '../../styles/colors';
 
 .container {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -13,16 +14,16 @@
 
     cursor: pointer;
 
-    img {
-        width: 232px;
-        height: 240px;
-
-        border-radius: 16px 16px 0px 0px;
-    }
-
     &:hover {
         transform: scale(1.01);
     }
+}
+
+.card-image {
+    width: 232px;
+    height: 240px;
+
+    border-radius: 16px 16px 0px 0px;
 }
 
 .content-infos {
@@ -83,4 +84,18 @@
         line-height: 24px;
         letter-spacing: 0.073px;
     }
+}
+
+.remove {
+    position: absolute;
+
+    width: 26px;
+    height: 26px;
+
+    top: 16px;
+    left: 16px;
+
+    background-color: white;
+
+    border-radius: 50%;
 }
