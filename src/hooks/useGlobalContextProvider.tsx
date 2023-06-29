@@ -1,12 +1,13 @@
 import { useState } from "react";
 import ProductType from "../types/ProductType";
 import products from "../data/products";
+import { useLocalStorage } from "usehooks-ts";
 
 
 const useGlobalContextProvider = () => {
     const [openModal, setOpenModal] = useState(false);
     const [currentIdProduct, setCurrentIdProduct] = useState(0);
-    const [allProducts, setAllProducts] = useState<ProductType[]>([...products]);
+    const [allProducts, setAllProducts] = useLocalStorage<ProductType[]>('products', [...products]);
 
     const handleConfirmModal = () => {
         const localProducts = [...allProducts];
